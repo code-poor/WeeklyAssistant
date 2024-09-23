@@ -1,0 +1,34 @@
+{
+  "name": "周报助手",
+  "version": "1.0",
+  "description": "让周报更自动，拥有更多的追求梦想的时间",
+  "manifest_version": 3,
+  "author":"codePoor",
+  "icons": {
+    "16": "src/assets/actionIcon.png",
+    "48": "src/assets/actionIcon.png",
+    "128": "src/assets/actionIcon.png"
+  },
+
+  "permissions": [
+    "tabs",
+     "activeTab",
+      "storage",
+       "webRequest",
+  "requestHeaders",
+  "windows",
+  "scripting",
+  "activeTab",
+  "webRequestBlocking",
+  "cookies",
+  "<all_urls>"
+],
+"host_permissions": [
+  "http://*/*",
+  "https://*/*"
+],
+  "action": {
+    "default_icon": "src/assets/actionIcon.png",
+    "default_popup": "src/action/index.html"
+  }
+}
