@@ -155,6 +155,21 @@ const PageMain = () => {
     document.body.removeChild(a);
   }
 
+  /**
+   * @description 过滤迭代版本
+   */
+  const filterByIterativeVersion = (rowData) => {
+    // 获取表头数据
+    const { tableHeaderData = [], iterativeVersion = [] } = currData.current;
+    // 获取迭代版本的key
+    const iterativeVersionInfo = tableHeaderData.find(item => item.name === '迭代版本') || {};
+    // 获取迭代版本的key
+    const iterativeVersionKey = iterativeVersionInfo.id;
+    // 获取迭代版本的真实值
+    const iterativeVersionValue = rowData[iterativeVersionKey]?.value;
+    // 如果迭代版本不存在则不处理
+    return iterativeVersion.includes(iterativeVersionValue)
+  }
   // 根据时间过滤
   const filterByTime = (item) => {
     const updatedTime = dayjs(item.updatedAt).valueOf();
@@ -204,9 +219,13 @@ const PageMain = () => {
       const flag = filterByTime(rowData)
       if (!flag) return false
       return '已完成'
-    } else {
-      return scheduleName
+    } else if (['未开始'].includes(scheduleName)) {
+      //未完成的需要走一个过滤
+      const flag = filterByIterativeVersion(rowData)
+      if (!flag) return false
+      return '未开始'
     }
+    return scheduleName
   }
 
   /**
